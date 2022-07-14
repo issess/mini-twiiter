@@ -21,7 +21,12 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@libs/*": ["libs/*"],
+      "@components/*": ["components/*"]
+    }
   },
   "exclude": [
     "node_modules"

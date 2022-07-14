@@ -1,14 +1,18 @@
 import { SWRConfig } from "swr";
+import type { AppProps } from "next/app";
 import "../global.css";
 
-export default function App({ Component, pageProps }: any) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) => fetch(url).then((response) => response.json())
+        fetcher: (url: string) =>
+          fetch(url).then((response) => response.json()),
       }}
     >
-      <Component {...pageProps} />
+      <div className="w-full max-w-xl mx-auto">
+        <Component {...pageProps} />
+      </div>
     </SWRConfig>
   );
 }
