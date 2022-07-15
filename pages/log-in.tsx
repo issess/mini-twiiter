@@ -13,7 +13,7 @@ interface LoginForm {
 
 interface MutationResult {
   ok: boolean;
-  result: string;
+  message: string;
 }
 export default function CreateAccount() {
   const [login, { loading, data, error }] =

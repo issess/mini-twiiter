@@ -9,6 +9,11 @@ async function handler(
 ) {
   const profile = await client.user.findUnique({
     where: { id: req.session.user?.id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
   });
   res.json({
     ok: true,
