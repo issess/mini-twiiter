@@ -8,6 +8,7 @@ import useMutation from "@libs/client/useMutation";
 import { useEffect } from "react";
 import { Post } from "@prisma/client";
 import { useRouter } from "next/router";
+import useUser from "@libs/client/useUser";
 
 interface UploadPostForm {
   description: string;
@@ -17,6 +18,7 @@ interface UploadPostMutation {
   post: Post;
 }
 const Upload: NextPage = () => {
+  const { user, isLoading } = useUser();
   const router = useRouter();
   const { register, handleSubmit } = useForm<UploadPostForm>();
   const [uploadPost, { loading, data }] =

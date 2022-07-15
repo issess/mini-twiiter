@@ -39,6 +39,7 @@ async function handler(
   });
   return res.json({
     ok: true,
+    message: "create user succeed",
   });
 }
 

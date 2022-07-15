@@ -35,7 +35,7 @@ async function handler(
     id: foundUser.id,
   };
   await req.session.save();
-  res.json({ ok: true });
+  res.json({ ok: true, message: "login succeed!" });
 }
 
 export default withApiSession(
