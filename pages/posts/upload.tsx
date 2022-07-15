@@ -37,7 +37,6 @@ const Upload: NextPage = () => {
         <TextArea
           register={register("description")}
           name="description"
-          label="tweet"
           required
         />
         <Button text={loading ? "Loading..." : "Tweet!"} />
