@@ -13,6 +13,7 @@ interface LoginForm {
 
 interface MutationResult {
   ok: boolean;
+  result: string;
 }
 export default function CreateAccount() {
   const [login, { loading, data, error }] =
@@ -26,9 +27,12 @@ export default function CreateAccount() {
     login(data);
   };
   const router = useRouter();
+  const [result, setResult] = useState("");
   useEffect(() => {
     if (data?.ok) {
       router.push("/");
+    } else {
+      setResult(data?.message);
     }
   }, [data, router]);
   return (
@@ -92,6 +96,7 @@ export default function CreateAccount() {
               type="submit"
               value="Login"
             />
+            <span className="text-sm text-red-500">{result}</span>
             <div className="flex items-center my-6 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
               <p className="text-center font-semibold mx-4 mb-0">OR</p>
             </div>
