@@ -7,41 +7,47 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  const {
-    query: { id },
-    session: { user },
-  } = req;
-  const post = await client.post.findUnique({
-    where: {
-      id: +id.toString(),
-    },
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true,
+  if (req.method === "GET") {
+    const posts = await client.post.findMany({
+      include: {
+        _count: {
+          select: {
+            favs: true,
+          },
         },
       },
-    },
-  });
-  const isLiked = Boolean(
-    await client.fav.findFirst({
-      where: {
-        postId: post?.id,
-        userId: user?.id,
+    });
+    res.json({
+      ok: true,
+      posts,
+    });
+  }
+  if (req.method === "POST") {
+    const {
+      body: { name, price, description },
+      session: { user },
+    } = req;
+    const post = await client.post.create({
+      data: {
+        description,
+        image: "xx",
+        user: {
+          connect: {
+            id: user?.id,
+          },
+        },
       },
-      select: {
-        id: true,
-      },
-    })
-  );
-  res.json({ ok: true, post, isLiked });
+    });
+    res.json({
+      ok: true,
+      post,
+    });
+  }
 }
 
 export default withApiSession(
   withHandler({
-    methods: ["GET"],
+    methods: ["GET", "POST"],
     handler,
   })
 );

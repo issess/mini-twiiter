@@ -1,6 +1,6 @@
-import React from "react";
-import { cls } from "@libs/client/utils";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React from "react";
 
 interface LayoutProps {
   title?: string;
@@ -36,7 +36,9 @@ export default function Layout({ title, canGoBack, children }: LayoutProps) {
             </button>
           ) : null}
           <div className="flex flex-col justify-center items-center">
-            <span className="text-3xl font-semibold">Mini Twitter</span>
+            <Link href="/">
+              <a className="text-3xl font-semibold">Mini Twitter</a>
+            </Link>
           </div>
         </div>
       </div>
